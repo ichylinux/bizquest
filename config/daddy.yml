@@ -1,0 +1,8 @@
+application:
+  name: bizquest
+  env: development
+  root: <%= File.expand_path('..', __FILE__) %>
+web:
+  server_name: localhost
+app:
+  type: passenger
