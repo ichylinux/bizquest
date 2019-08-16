@@ -5,6 +5,7 @@ export default {
   parent: 'app',
   width: window.innerWidth,
   height: window.innerHeight - 4,
+  zoom: 1,
   pixelArt: true,
   roundPixels: true,
   physics: {
