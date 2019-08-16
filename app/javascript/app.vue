@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
-  </div>
 </template>
 
 <script>
+import 'src/index';
+
 export default {
   data: function () {
     return {
-      message: "Hello Vue!"
     }
   }
 }
