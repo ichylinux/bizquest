@@ -1,35 +1,15 @@
 import Phaser from 'phaser';
-import logo from 'images/logo.png';
+import config from './config';
+import Boot from './scenes/boot';
+import Game from './scenes/game';
 
-var config = {
-    type: Phaser.AUTO,
-    parent: 'app',
-    width: 800,
-    height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
-};
-
-var game = new Phaser.Game(config);
-
-function preload ()
-{
-    this.load.image('logo', logo);
+class BizQuest extends Phaser.Game {
+  constructor () {
+    super(config);
+    this.scene.add('boot', Boot);
+    this.scene.add('game', Game);
+    this.scene.start('boot');
+  }
 }
 
-function create ()
-{
-    var logo = this.add.image(400, 150, 'logo');
-
-    this.tweens.add({
-        targets: logo,
-        y: 450,
-        duration: 2000,
-        ease: 'Power2',
-        yoyo: true,
-        loop: -1
-    });
-
-}
+window.game = new BizQuest();
