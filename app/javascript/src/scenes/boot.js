@@ -9,12 +9,17 @@ export default class Boot extends Phaser.Scene {
   }
 
   preload () {
+    this.levels = {
+      1: 'world',
+      2: 'myhome'
+    };
+
     this.load.tilemapTiledJSON('world', map);
     this.load.spritesheet('world', sprite, { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('player', player, { frameWidth: 16, frameHeight: 32 });
   }
 
   create () {
-    this.scene.start('game');
+    this.scene.start('game', { level: 1, newGame: true, levels: this.levels });
   }
 };

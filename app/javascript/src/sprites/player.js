@@ -13,6 +13,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   update (cursors) {
     this.setVelocity(0);
 
+		// stop player from moving where chainging to another level
+    if (this.scene.loadingLevel) {
+      return;
+    }
+
     let velocity = 200;
 
     if (cursors.up.isDown) {
