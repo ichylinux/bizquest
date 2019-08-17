@@ -39,6 +39,8 @@ export default class Game extends Phaser.Scene {
         if (obj.type === 'PlayerPosition') {
           this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
         }
+      } else {
+        this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
       }
     });
   }
@@ -46,17 +48,19 @@ export default class Game extends Phaser.Scene {
   createMyHome() {
     this.map.findObject('myhome', (obj) => {
       if (this._LEVEL === 1) {
-        this.myhome = new MyHome(this, (obj.x + 6) * this.scale, obj.y * this.scale);
+        this.myhome = new MyHome(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
       } else if (this._LEVEL === 2) {
-        this.myhome = new MyHome(this, obj.x * this.scale, obj.y * this.scale);
+        this.myhome = new MyHome(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
       }
     });
   }
 
   createMap() {
-    this.add.tileSprite(0, 0, 4000, 4000, 'world', 16);
-    this.map = this.make.tilemap({key: 'world'});
-    this.tiles = this.map.addTilesetImage('world');
+    let levelName = this._LEVELS[this._LEVEL];
+
+    this.add.tileSprite(0, 0, 4000, 4000, levelName, 16);
+    this.map = this.make.tilemap({key: levelName});
+    this.tiles = this.map.addTilesetImage(levelName);
 
     this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
     this.backgroundLayer.setScale(this.scale);

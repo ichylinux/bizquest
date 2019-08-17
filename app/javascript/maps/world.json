@@ -51,8 +51,8 @@
                  "type":"PlayerPosition",
                  "visible":true,
                  "width":16,
-                 "x":639.5,
-                 "y":401.5
+                 "x":646.5,
+                 "y":377.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -74,7 +74,7 @@
                  "type":"Entrance",
                  "visible":true,
                  "width":16,
-                 "x":641.5,
+                 "x":643.5,
                  "y":352
                 }],
          "opacity":1,

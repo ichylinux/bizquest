@@ -457,7 +457,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="player">
-  <object id="3" name="PlayerPosition" type="PlayerPosition" gid="2116" x="639.5" y="401.5" width="16" height="16"/>
+  <object id="3" name="PlayerPosition" type="PlayerPosition" gid="2116" x="646.5" y="377.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="myhome">
   <object id="6" name="Entrance" type="Entrance" gid="1849" x="643.5" y="352" width="16" height="16"/>
