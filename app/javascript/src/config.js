@@ -13,7 +13,7 @@ export default {
     default: 'arcade',
     fps: {
       min: 2,
-      target: 15,
+      target: 10,
       forceSetTimeOut: true
     },
     arcade: {
