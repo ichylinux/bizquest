@@ -35,6 +35,7 @@ export default class Game extends Phaser.Scene {
   }
 
   createMap() {
+    this.add.tileSprite(0, 0, 4000, 2000, 'world', 16);
     this.map = this.make.tilemap({ key: 'world' });
     this.tiles = this.map.addTilesetImage('world');
     this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
