@@ -6,12 +6,18 @@ export default {
   width: window.innerWidth,
   height: window.innerHeight - 4,
   zoom: 1,
+  resolution: 1,
   pixelArt: true,
   roundPixels: true,
   physics: {
     default: 'arcade',
+    fps: {
+      min: 2,
+      target: 15,
+      forceSetTimeOut: true
+    },
     arcade: {
-      debug: true,
+      debug: false,
       gravity: { y: 0 }
     }
   }

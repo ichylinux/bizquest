@@ -10,6 +10,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.scale = 2;
     this.cursors = this.input.keyboard.createCursorKeys();
     this.createMap();
     this.createPlayer();
@@ -28,7 +29,7 @@ export default class Game extends Phaser.Scene {
   createPlayer() {
     this.map.findObject('player', (obj) => {
       if (obj.type === 'StartingPoint') {
-        this.player = new Player(this, obj.x, obj.y);
+        this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
       }
     });
   }
@@ -37,7 +38,9 @@ export default class Game extends Phaser.Scene {
     this.map = this.make.tilemap({ key: 'world' });
     this.tiles = this.map.addTilesetImage('world');
     this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
+    this.backgroundLayer.setScale(this.scale);
     this.blockedLayer = this.map.createStaticLayer('blocked', this.tiles, 0, 0);
+    this.blockedLayer.setScale(this.scale);
     this.blockedLayer.setCollisionByExclusion([-1]);
   }
 };
