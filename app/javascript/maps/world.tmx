@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="144" height="144" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="7">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="144" height="144" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="16">
  <tileset firstgid="1" name="world" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
   <image source="../images/gfx/world.png" width="640" height="576"/>
  </tileset>
@@ -457,9 +457,16 @@
 </data>
  </layer>
  <objectgroup id="3" name="player">
-  <object id="3" name="PlayerPosition" type="PlayerPosition" gid="2116" x="646.5" y="377.5" width="16" height="16"/>
+  <object id="3" name="PlayerPosition" type="PlayerPosition" gid="2116" x="647.5" y="377.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="myhome">
   <object id="6" name="Entrance" type="Entrance" gid="1849" x="643.5" y="352" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="14" name="coins">
+  <object id="7" name="Coin" type="Coin" gid="1980" x="769" y="448" width="16" height="16"/>
+  <object id="12" name="Coin" type="Coin" gid="1980" x="867.5" y="551.5" width="16" height="16"/>
+  <object id="13" name="Coin" type="Coin" gid="1980" x="662.5" y="526.5" width="16" height="16"/>
+  <object id="14" name="Coin" type="Coin" gid="1980" x="617" y="609.5" width="16" height="16"/>
+  <object id="15" name="Coin" type="Coin" gid="1980" x="811.5" y="652" width="16" height="16"/>
  </objectgroup>
 </map>

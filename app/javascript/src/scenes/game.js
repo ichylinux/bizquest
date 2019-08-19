@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Player from '../sprites/player';
 import MyHome from '../sprites/myhome';
+import Coins from '../groups/coins';
 
 export default class Game extends Phaser.Scene {
   constructor (key) {
@@ -20,6 +21,7 @@ export default class Game extends Phaser.Scene {
     this.createMap();
     this.createPlayer();
     this.createMyHome();
+    this.createCoins();
     this.addCollisions();
     this.cameras.main.startFollow(this.player);
   }
@@ -31,6 +33,7 @@ export default class Game extends Phaser.Scene {
   addCollisions() {
     this.physics.add.collider(this.player, this.blockedLayer);
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
+    this.physics.add.overlap(this.coins, this.player, this.coins.collectCoin.bind(this.coins));
   }
 
   createPlayer() {
@@ -53,6 +56,13 @@ export default class Game extends Phaser.Scene {
         this.myhome = new MyHome(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
       }
     });
+  }
+  
+  createCoins() {
+    if (this._LEVEL == 1) {
+      this.coinObjects = this.map.createFromObjects('coins', 'Coin', {key: 'objects', frame: 132});
+    }
+    this.coins = new Coins(this.physics.world, this, [], this.coinObjects);
   }
 
   createMap() {
