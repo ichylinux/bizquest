@@ -21,25 +21,23 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
-    let velocity = 200;
-
     if (cursors.up.isDown) {
-      this.setVelocityY(velocity * -1);
+      this.setVelocityY(this.getVelocity(cursors.up) * -1);
       if (cursors.left.isUp && cursors.right.isUp) {
         this.anims.play('up', true);
       }
     } else if (cursors.down.isDown) {
-      this.setVelocityY(velocity);
+      this.setVelocityY(this.getVelocity(cursors.down));
       if (cursors.left.isUp && cursors.right.isUp) {
         this.anims.play('down', true);
       }
     }
 
     if (cursors.left.isDown) {
-      this.setVelocityX(velocity * -1);
+      this.setVelocityX(this.getVelocity(cursors.left) * -1);
       this.anims.play('left', true);
     } else if (cursors.right.isDown) {
-      this.setVelocityX(velocity);
+      this.setVelocityX(this.getVelocity(cursors.right));
       this.anims.play('right', true);
     }
 
@@ -56,6 +54,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.setFrame(17);
       }
     }
+  }
+  
+  getVelocity(key) {
+    return key.ctrlKey ? 400 : 200;
   }
   
   createMove() {
