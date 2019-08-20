@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
     this._LEVEL = data.level;
     this._LEVELS = data.levels;
     this._NEWGAME = data.newGame;
+    this.playerDirection = data.playerDirection;
     this.loadingLevel = false;
   }
 
@@ -88,9 +89,9 @@ export default class Game extends Phaser.Scene {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL === 1) {
-          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false });
+          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
         } else if (this._LEVEL === 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false });
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
         }
       });
       this.loadingLevel = true;

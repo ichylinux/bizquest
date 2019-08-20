@@ -23,37 +23,40 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     if (cursors.up.isDown) {
       this.setVelocityY(this.getVelocity(cursors.up) * -1);
-      if (cursors.left.isUp && cursors.right.isUp) {
-        this.anims.play('up', true);
-      }
+      this.scene.playerDirection = 'up';
     } else if (cursors.down.isDown) {
       this.setVelocityY(this.getVelocity(cursors.down));
-      if (cursors.left.isUp && cursors.right.isUp) {
-        this.anims.play('down', true);
-      }
+      this.scene.playerDirection = 'down';
     }
 
     if (cursors.left.isDown) {
       this.setVelocityX(this.getVelocity(cursors.left) * -1);
-      this.anims.play('left', true);
+      this.scene.playerDirection = 'left';
     } else if (cursors.right.isDown) {
       this.setVelocityX(this.getVelocity(cursors.right));
-      this.anims.play('right', true);
+      this.scene.playerDirection = 'right';
     }
 
-    if (this.body.velocity.x === 0 && this.body.velocity.y === 0) {
-      if (!this.anims.currentAnim) {
-        this.setFrame(0);
-      } else if (this.anims.currentAnim.key == 'up') {
-        this.setFrame(34);
-      } else if (this.anims.currentAnim.key == 'down') {
-        this.setFrame(0);
-      } else if (this.anims.currentAnim.key == 'left') {
-        this.setFrame(51);
-      } else if (this.anims.currentAnim.key == 'right') {
-        this.setFrame(17);
-      }
+    if (this.isStanding()) {
+      this.setFrame(this.getStandingFrame(this.scene.playerDirection));
+    } else {
+      this.anims.play(this.scene.playerDirection, true);
     }
+  }
+
+  isStanding() {
+    return this.body.velocity.x === 0 && this.body.velocity.y === 0;
+  }
+
+  getStandingFrame(direction) {
+    let standingPosition = {
+      'up' : 34,
+      'down' : 0,
+      'left' : 51,
+      'right' : 17
+    };
+
+    return standingPosition[direction];
   }
   
   getVelocity(key) {
@@ -62,33 +65,18 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   
   createMove() {
     let frameRate = 5;
+    let directions = ['up', 'down', 'left', 'right'];
 
-    this.anims.animationManager.create({
-      key: 'up',
-      frames: this.anims.animationManager.generateFrameNumbers('player', { start: 34, end: 37 }),
-      frameRate: frameRate,
-      repeat: -1
-    });
+    directions.forEach(direction => {
+      let start = this.getStandingFrame(direction);
+      let end = start + 3;
 
-    this.anims.animationManager.create({
-      key: 'down',
-      frames: this.anims.animationManager.generateFrameNumbers('player', { start: 0, end: 3 }),
-      frameRate: frameRate,
-      repeat: -1
-    });
-
-    this.anims.animationManager.create({
-      key: 'left',
-      frames: this.anims.animationManager.generateFrameNumbers('player', { start: 51, end: 54 }),
-      frameRate: frameRate,
-      repeat: -1
-    });
-
-    this.anims.animationManager.create({
-      key: 'right',
-      frames: this.anims.animationManager.generateFrameNumbers('player', { start: 17, end: 20 }),
-      frameRate: frameRate,
-      repeat: -1
+      this.anims.animationManager.create({
+        key: direction,
+        frames: this.anims.animationManager.generateFrameNumbers('player', {start: start, end: end}),
+        frameRate: frameRate,
+        repeat: -1
+      });
     });
   }
 }
