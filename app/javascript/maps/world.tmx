@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="144" height="144" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="16">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="144" height="144" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="21">
  <tileset firstgid="1" name="world" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
   <image source="../images/gfx/world.png" width="640" height="576"/>
  </tileset>
@@ -11,6 +11,9 @@
  </tileset>
  <tileset firstgid="1848" name="objects" tilewidth="16" tileheight="16" tilecount="660" columns="33">
   <image source="../images/gfx/objects.png" width="528" height="320"/>
+ </tileset>
+ <tileset firstgid="2508" name="butterfly" tilewidth="32" tileheight="32" tilecount="16" columns="8">
+  <image source="../images/butterfly.png" width="256" height="64"/>
  </tileset>
  <layer id="10" name="background" width="144" height="144">
   <data encoding="csv">
@@ -468,5 +471,10 @@
   <object id="13" name="Coin" type="Coin" gid="1980" x="662.5" y="526.5" width="16" height="16"/>
   <object id="14" name="Coin" type="Coin" gid="1980" x="617" y="609.5" width="16" height="16"/>
   <object id="15" name="Coin" type="Coin" gid="1980" x="811.5" y="652" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="15" name="enemies">
+  <object id="16" name="butterfly" type="Butterfly" gid="2508" x="503.5" y="457.5" width="32" height="32"/>
+  <object id="19" name="butterfly" type="Butterfly" gid="2508" x="393.5" y="568" width="32" height="32"/>
+  <object id="20" name="butterfly" type="Butterfly" gid="2508" x="328.5" y="374.5" width="32" height="32"/>
  </objectgroup>
 </map>

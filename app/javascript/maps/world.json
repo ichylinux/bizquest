@@ -153,9 +153,56 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":15,
+         "name":"enemies",
+         "objects":[
+                {
+                 "gid":2508,
+                 "height":32,
+                 "id":16,
+                 "name":"butterfly",
+                 "rotation":0,
+                 "type":"Butterfly",
+                 "visible":true,
+                 "width":32,
+                 "x":503.5,
+                 "y":457.5
+                }, 
+                {
+                 "gid":2508,
+                 "height":32,
+                 "id":19,
+                 "name":"butterfly",
+                 "rotation":0,
+                 "type":"Butterfly",
+                 "visible":true,
+                 "width":32,
+                 "x":393.5,
+                 "y":568
+                }, 
+                {
+                 "gid":2508,
+                 "height":32,
+                 "id":20,
+                 "name":"butterfly",
+                 "rotation":0,
+                 "type":"Butterfly",
+                 "visible":true,
+                 "width":32,
+                 "x":328.5,
+                 "y":374.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":15,
- "nextobjectid":16,
+ "nextlayerid":16,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
@@ -212,6 +259,19 @@
          "tilecount":660,
          "tileheight":16,
          "tilewidth":16
+        }, 
+        {
+         "columns":8,
+         "firstgid":2508,
+         "image":"..\/images\/butterfly.png",
+         "imageheight":64,
+         "imagewidth":256,
+         "margin":0,
+         "name":"butterfly",
+         "spacing":0,
+         "tilecount":16,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":16,
  "type":"map",

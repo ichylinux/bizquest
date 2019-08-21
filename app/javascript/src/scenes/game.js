@@ -2,9 +2,11 @@ import Phaser from 'phaser';
 import Player from '../sprites/player';
 import MyHome from '../sprites/myhome';
 import Coins from '../groups/coins';
+import Enemies from '../groups/enemies';
 
 export default class Game extends Phaser.Scene {
-  constructor (key) {
+
+  constructor(key) {
     super(key);
   }
 
@@ -23,6 +25,7 @@ export default class Game extends Phaser.Scene {
     this.createPlayer();
     this.createMyHome();
     this.createCoins();
+    this.createEnemies();
     this.addCollisions();
     this.cameras.main.startFollow(this.player);
   }
@@ -64,6 +67,14 @@ export default class Game extends Phaser.Scene {
       this.coinObjects = this.map.createFromObjects('coins', 'Coin', {key: 'objects', frame: 132});
     }
     this.coins = new Coins(this.physics.world, this, [], this.coinObjects);
+  }
+
+  createEnemies() {
+    if (this._LEVEL == 1) {
+      this.butterflyObjects = this.map.createFromObjects('enemies', 'butterfly', {key: 'butterfly', frame: 0});
+      console.log(this.butterflyObjects);
+    }
+    this.enemies = new Enemies(this.physics.world, this, [], this.butterflyObjects);
   }
 
   createMap() {

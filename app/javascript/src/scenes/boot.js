@@ -5,9 +5,11 @@ import worldImage from 'images/gfx/world.png';
 import innerImage from 'images/gfx/inner.png';
 import playerImage from 'images/gfx/character.png';
 import objectsImage from 'images/gfx/objects.png';
+import butterflyImage from 'images/butterfly.png';
 
 export default class Boot extends Phaser.Scene {
-  constructor (key) {
+
+  constructor(key) {
     super(key);
   }
 
@@ -23,6 +25,7 @@ export default class Boot extends Phaser.Scene {
     this.load.spritesheet('inner', innerImage, { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('player', playerImage, { frameWidth: 16, frameHeight: 32 });
     this.load.spritesheet('objects', objectsImage, { frameWidth: 16, frameHeight: 16 });
+    this.load.spritesheet('butterfly', butterflyImage, {frameWidth: 32, frameHeight: 32});
   }
 
   create () {
