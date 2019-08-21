@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
 
-  constructor (scene, x, y) {
+  constructor(scene, x, y) {
     super(scene, x, y, 'player', 0);
     this.scene = scene;
 
@@ -13,7 +13,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.createMove();
   }
 
-  update (cursors) {
+  update(cursors) {
     this.setVelocity(0);
 
 		// stop player from moving where chainging to another level
