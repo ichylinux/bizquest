@@ -32,6 +32,7 @@ export default class Game extends Phaser.Scene {
 
   update () {
     this.player.update(this.cursors);
+    this.enemies.update();
   }
 
   addCollisions() {
