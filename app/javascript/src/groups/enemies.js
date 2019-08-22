@@ -22,14 +22,4 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  update() {
-    if (!this.timer) {
-      this.timer = setTimeout(() => {
-        let children = this.getChildren();
-        let rand = Math.floor(Math.random() * children.length);
-        children[rand].update();
-        this.timer = null;
-      }, 3000);
-    }
-  }
 }

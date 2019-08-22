@@ -32,7 +32,6 @@ export default class Game extends Phaser.Scene {
 
   update () {
     this.player.update(this.cursors);
-    this.enemies.update();
   }
 
   addCollisions() {
@@ -73,7 +72,6 @@ export default class Game extends Phaser.Scene {
   createEnemies() {
     if (this._LEVEL == 1) {
       this.butterflyObjects = this.map.createFromObjects('enemies', 'butterfly', {key: 'butterfly', frame: 0});
-      console.log(this.butterflyObjects);
     }
     this.enemies = new Enemies(this.physics.world, this, [], this.butterflyObjects);
   }

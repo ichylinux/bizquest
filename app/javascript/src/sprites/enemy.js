@@ -13,8 +13,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setScale(this.scale * this.scene.scale);
     
     this.createMove();
-    this.randomFlip();
-    this.play();
   }
 
   createMove() {
@@ -28,32 +26,30 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
       frameRate: frameRate,
       repeat: -1
     });
-  }
-  
-  play() {
-    this.anims.play(this.animationKey, true);
-  }
-  
-  pause() {
-    this.anims.pause();
-  }
-  
-  resume() {
-    this.anims.resume();
-  }
 
-  stop() {
-    this.anims.stop();
+    this.anims.play(this.animationKey, true);
+    this.setVelocityX(-20); // image is facing to the left
+
+    this.scene.time.addEvent({
+      delay: Math.floor(Math.random() * 1000) + 1000,
+      callback: this.changeDirection,
+      loop: true,
+      callbackScope: this
+    });
   }
   
-  update() {
-    let flip = this.flipX;
-    let nextFlip = this.randomFlip();
-    
-    if (flip != nextFlip) {
-      this.pause();
-      this.flipX = nextFlip;
-      this.resume(); 
+  changeDirection() {
+    this.flipX = this.randomFlip();
+    if (this.flipX) {
+      this.setVelocityX(20);
+    } else {
+      this.setVelocityX(-20);
+    }
+
+    if (this.randomFlip()) {
+      this.setVelocityY(10 * Math.floor(Math.random() * 2));
+    } else {
+      this.setVelocityY(-1 * 10 * Math.floor(Math.random() * 2));
     }
   }
   
