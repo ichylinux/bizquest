@@ -21,23 +21,33 @@ export default class Game extends Phaser.Scene {
   create() {
     this.scale = 2;
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.createMap();
-    this.createPlayer();
-    this.createMyHome();
-    this.createCoins();
-    this.createEnemies();
-    this.addCollisions();
-    this.cameras.main.startFollow(this.player);
+
+    if (this._LEVEL === 3) {
+      this.createBattleField();
+      this.cameras.main.stopFollow();
+    } else {
+      this.createMap();
+      this.createPlayer();
+      this.createMyHome();
+      this.createCoins();
+      this.createEnemies();
+      this.addCollisions();
+      this.cameras.main.startFollow(this.player);
+    }
   }
 
   update () {
-    this.player.update(this.cursors);
+    if (this._LEVEL != 3) {
+      this.player.update(this.cursors);
+    }
   }
 
   addCollisions() {
     this.physics.add.collider(this.player, this.blockedLayer);
+    this.physics.add.collider(this.enemies, this.blockedLayer);
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
     this.physics.add.overlap(this.coins, this.player, this.coins.collectCoin.bind(this.coins));
+    this.physics.add.overlap(this.player, this.enemies, this.startBattle.bind(this));
   }
 
   createPlayer() {
@@ -94,6 +104,12 @@ export default class Game extends Phaser.Scene {
     this.blockedLayer.setCollisionByExclusion([-1]);
   }
 
+  createBattleField() {
+    let levelName = this._LEVELS[this._LEVEL];
+
+    this.map = this.make.tilemap({key: levelName});
+  }
+
   loadNextLevel() {
     if (!this.loadingLevel) {
       this.cameras.main.fade(500, 0, 0, 0);
@@ -103,6 +119,16 @@ export default class Game extends Phaser.Scene {
         } else if (this._LEVEL === 2) {
           this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
         }
+      });
+      this.loadingLevel = true;
+    }
+  }
+  
+  startBattle() {
+    if (!this.loadingLevel) {
+      this.cameras.main.fade(1000, 0, 0, 0);
+      this.cameras.main.on('camerafadeoutcomplete', () => {
+        this.scene.restart({ level: 3, levels: this._LEVELS, newGame: false, playerDirection: 'down' });
       });
       this.loadingLevel = true;
     }
