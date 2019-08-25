@@ -8,4 +8,10 @@ export default class Wizard extends Phaser.GameObjects.Image {
     this.setScale(this.scene.scale);
   }
 
+  update(cursors) {
+    if (cursors.space.isDown) {
+    this.scene.loadNextLevel(1);
+    }
+  }
+
 }

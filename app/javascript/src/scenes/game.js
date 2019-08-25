@@ -39,7 +39,9 @@ export default class Game extends Phaser.Scene {
   }
 
   update () {
-    if (this._LEVEL != 3) {
+    if (this._LEVEL == 3) {
+      this.enemy.update(this.cursors);
+    } else {
       this.player.update(this.cursors);
     }
   }
@@ -107,7 +109,7 @@ export default class Game extends Phaser.Scene {
   }
 
   createBattleField() {
-    var enemy = new Wizard(this, this.sys.canvas.width / 2, 200);
+    this.enemy = new Wizard(this, this.sys.canvas.width / 2, 200);
 
     let maxRow = 5;
     let maxCol = 15;
@@ -124,17 +126,32 @@ export default class Game extends Phaser.Scene {
     }
 
     let name = '魔法使い';
-    this.scoreText = this.add.text(offsetX + 16, offsetY + 16, `${name}があらわれた。`, {fontSize: '16px', fill: '#000000'});
+    this.battleText = this.add.text(offsetX + 16, offsetY + 16, `${name}があらわれた。`, {fontSize: '16px', fill: '#000000'});
+    this.promptText = this.add.text(offsetX + ((maxCol - 1) / 2 * 16 * this.scale), offsetY + (16 * 5), '▽', {fontSize: '16px', fill: '#000000'});
+    this.time.addEvent({
+      delay: 500,
+      callback: this.blinkPrompt,
+      loop: true,
+      callbackScope: this
+    });
+  }
+  
+  blinkPrompt() {
+    this.promptText.setVisible(!this.promptText.visible);
   }
 
-  loadNextLevel() {
+  loadNextLevel(level) {
     if (!this.loadingLevel) {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
-        if (this._LEVEL === 1) {
-          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
-        } else if (this._LEVEL === 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+        if (level) {
+          this.scene.restart({ level: level, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+        } else {
+          if (this._LEVEL === 1) {
+            this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+          } else if (this._LEVEL === 2) {
+            this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+          }
         }
       });
       this.loadingLevel = true;
