@@ -17,6 +17,8 @@ export default class Game extends Phaser.Scene {
     this._LEVELS = data.levels;
     this._NEWGAME = data.newGame;
     this.playerDirection = data.playerDirection;
+    this.playerX = data.playerX;
+    this.playerY = data.playerY;
     this.loadingLevel = false;
   }
 
@@ -39,7 +41,7 @@ export default class Game extends Phaser.Scene {
   }
 
   update () {
-    if (this._LEVEL == 3) {
+    if (this._LEVEL === 3) {
       this.enemy.update(this.cursors);
     } else {
       this.player.update(this.cursors);
@@ -51,7 +53,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.enemies, this.blockedLayer);
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
     this.physics.add.overlap(this.coins, this.player, this.coins.collectCoin.bind(this.coins));
-    this.physics.add.overlap(this.player, this.enemies, this.startBattle.bind(this));
+    this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
   }
 
   createPlayer() {
@@ -61,7 +63,9 @@ export default class Game extends Phaser.Scene {
           this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
         }
       } else {
-        this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
+        let x = this.playerX || (obj.x * this.scale);
+        let y = this.playerY || (obj.y * this.scale);
+        this.player = new Player(this, x, y);
       }
     });
   }
@@ -140,31 +144,20 @@ export default class Game extends Phaser.Scene {
     this.promptText.setVisible(!this.promptText.visible);
   }
 
-  loadNextLevel(level) {
+  loadNextLevel() {
     if (!this.loadingLevel) {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
-        if (level) {
-          this.scene.restart({ level: level, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
-        } else {
-          if (this._LEVEL === 1) {
-            this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
-          } else if (this._LEVEL === 2) {
-            this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
-          }
+        if (this._LEVEL === 1) {
+          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+        } else if (this._LEVEL === 2) {
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+        } else if (this._LEVEL === 3) {
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection, playerX: this.playerX, playerY: this.playerY });
         }
       });
       this.loadingLevel = true;
     }
   }
   
-  startBattle() {
-    if (!this.loadingLevel) {
-      this.cameras.main.fade(1000, 0, 0, 0);
-      this.cameras.main.on('camerafadeoutcomplete', () => {
-        this.scene.restart({ level: 3, levels: this._LEVELS, newGame: false, playerDirection: 'down' });
-      });
-      this.loadingLevel = true;
-    }
-  }
 };

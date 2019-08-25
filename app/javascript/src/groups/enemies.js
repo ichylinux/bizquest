@@ -22,4 +22,13 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     });
   }
 
+  startBattle(player, enemy) {
+    if (!this.scene.loadingLevel) {
+      this.scene.cameras.main.fade(1000, 0, 0, 0);
+      this.scene.cameras.main.on('camerafadeoutcomplete', () => {
+        this.scene.scene.restart({ level: 3, levels: this.scene._LEVELS, newGame: false, playerDirection: this.scene.playerDirection, playerX: this.scene.player.x, playerY: this.scene.player.y });
+      });
+      this.scene.loadingLevel = true;
+    }
+  }
 }
