@@ -1,12 +1,13 @@
 import Phaser from 'phaser';
 import worldMap from 'maps/world.json';
 import innerMap from 'maps/inner.json';
-import battleMap from 'maps/battle.json';
 import worldImage from 'images/gfx/world.png';
 import innerImage from 'images/gfx/inner.png';
 import playerImage from 'images/gfx/character.png';
 import objectsImage from 'images/gfx/objects.png';
 import butterflyImage from 'images/butterfly.png';
+
+import wizardImage from 'images/enemies/wizard.png';
 
 export default class Boot extends Phaser.Scene {
 
@@ -23,12 +24,13 @@ export default class Boot extends Phaser.Scene {
 
     this.load.tilemapTiledJSON('world', worldMap);
     this.load.tilemapTiledJSON('inner', innerMap);
-    this.load.tilemapTiledJSON('battle', battleMap);
     this.load.spritesheet('world', worldImage, { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('inner', innerImage, { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('player', playerImage, { frameWidth: 16, frameHeight: 32 });
     this.load.spritesheet('objects', objectsImage, { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('butterfly', butterflyImage, {frameWidth: 32, frameHeight: 32});
+
+    this.load.image('wizard', wizardImage);
   }
 
   create () {

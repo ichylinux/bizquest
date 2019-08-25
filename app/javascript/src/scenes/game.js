@@ -4,6 +4,8 @@ import MyHome from '../sprites/myhome';
 import Coins from '../groups/coins';
 import Enemies from '../groups/enemies';
 
+import Wizard from '../enemies/wizard';
+
 export default class Game extends Phaser.Scene {
 
   constructor(key) {
@@ -105,9 +107,7 @@ export default class Game extends Phaser.Scene {
   }
 
   createBattleField() {
-    let levelName = this._LEVELS[this._LEVEL];
-
-    this.map = this.make.tilemap({key: levelName});
+    var image = new Wizard(this, this.sys.canvas.width / 2, 200);
   }
 
   loadNextLevel() {
