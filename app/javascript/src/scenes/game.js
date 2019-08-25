@@ -107,7 +107,24 @@ export default class Game extends Phaser.Scene {
   }
 
   createBattleField() {
-    var image = new Wizard(this, this.sys.canvas.width / 2, 200);
+    var enemy = new Wizard(this, this.sys.canvas.width / 2, 200);
+
+    let maxRow = 5;
+    let maxCol = 15;
+    let startFrame = 45;
+    let offsetX = this.sys.canvas.width / 2 - (16 * this.scale * maxCol / 2);
+    let offsetY = this.sys.canvas.height - 50 - ((maxRow - 1) * 16 * this.scale);
+
+    for (let i = 0; i < maxRow; i ++) {
+      for (let j = 0; j < maxCol; j ++) {
+        var image = new Phaser.GameObjects.Image(this, offsetX + (j * 16 * this.scale), offsetY + (i * 16 * this.scale), 'font', (i * maxCol) + j + startFrame);
+        this.add.existing(image);
+        image.setScale(this.scale);
+      }
+    }
+
+    let name = '魔法使い';
+    this.scoreText = this.add.text(offsetX + 16, offsetY + 16, `${name}があらわれた。`, {fontSize: '16px', fill: '#000000'});
   }
 
   loadNextLevel() {
