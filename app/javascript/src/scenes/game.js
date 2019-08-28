@@ -147,11 +147,11 @@ export default class Game extends Phaser.Scene {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL === 1) {
-          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, player: this.player.toObj() });
+          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, player: {direction: this.player.direction} });
         } else if (this._LEVEL === 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: this.player.toObj() });
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: {direction: this.player.direction} });
         } else if (this._LEVEL === 3) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: this.player.toObj() });
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: {direction: this.player.direction} });
         }
       });
       this.loadingLevel = true;

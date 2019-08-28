@@ -10,7 +10,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
     this.setScale(this.scene.scale);
     
-    this.direction = 'down';
+    if (this.scene.playerData) {
+      this.direction = this.scene.playerData.direction;
+    }
 
     this.createMove();
   }
@@ -80,13 +82,5 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         repeat: -1
       });
     });
-  }
-  
-  toObj() {
-    return {
-      direction: this.direction,
-      x: this.x,
-      y: this.y
-    }
   }
 }
