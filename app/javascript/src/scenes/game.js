@@ -16,9 +16,7 @@ export default class Game extends Phaser.Scene {
     this._LEVEL = data.level;
     this._LEVELS = data.levels;
     this._NEWGAME = data.newGame;
-    this.playerDirection = data.playerDirection;
-    this.playerX = data.playerX;
-    this.playerY = data.playerY;
+    this.playerData = data.player;
     this.loadingLevel = false;
   }
 
@@ -63,8 +61,8 @@ export default class Game extends Phaser.Scene {
           this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
         }
       } else {
-        let x = this.playerX || (obj.x * this.scale);
-        let y = this.playerY || (obj.y * this.scale);
+        let x = this.playerData.x || (obj.x * this.scale);
+        let y = this.playerData.y || (obj.y * this.scale);
         this.player = new Player(this, x, y);
       }
     });
@@ -149,11 +147,11 @@ export default class Game extends Phaser.Scene {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL === 1) {
-          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, player: this.player.toObj() });
         } else if (this._LEVEL === 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection });
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: this.player.toObj() });
         } else if (this._LEVEL === 3) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, playerDirection: this.playerDirection, playerX: this.playerX, playerY: this.playerY });
+          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: this.player.toObj() });
         }
       });
       this.loadingLevel = true;

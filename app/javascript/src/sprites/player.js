@@ -10,6 +10,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
     this.setScale(this.scene.scale);
     
+    this.direction = 'down';
+
     this.createMove();
   }
 
@@ -23,24 +25,24 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     if (cursors.up.isDown) {
       this.setVelocityY(this.getVelocity(cursors.up) * -1);
-      this.scene.playerDirection = 'up';
+      this.direction = 'up';
     } else if (cursors.down.isDown) {
       this.setVelocityY(this.getVelocity(cursors.down));
-      this.scene.playerDirection = 'down';
+      this.direction = 'down';
     }
 
     if (cursors.left.isDown) {
       this.setVelocityX(this.getVelocity(cursors.left) * -1);
-      this.scene.playerDirection = 'left';
+      this.direction = 'left';
     } else if (cursors.right.isDown) {
       this.setVelocityX(this.getVelocity(cursors.right));
-      this.scene.playerDirection = 'right';
+      this.direction = 'right';
     }
 
     if (this.isStanding()) {
-      this.setFrame(this.getStandingFrame(this.scene.playerDirection));
+      this.setFrame(this.getStandingFrame(this.direction));
     } else {
-      this.anims.play(this.scene.playerDirection, true);
+      this.anims.play(this.direction, true);
     }
   }
 
@@ -78,5 +80,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         repeat: -1
       });
     });
+  }
+  
+  toObj() {
+    return {
+      direction: this.direction,
+      x: this.x,
+      y: this.y
+    }
   }
 }
