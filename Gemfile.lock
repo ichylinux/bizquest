@@ -101,7 +101,7 @@ GEM
       excon (>= 0.47.0)
       multi_json
     erubi (1.9.0)
-    excon (0.68.0)
+    excon (0.71.0)
     execjs (2.7.0)
     ffi (1.11.2)
     ffi-yajl (2.3.1)
