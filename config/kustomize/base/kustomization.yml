@@ -1,0 +1,6 @@
+namespace: bizquest
+resources:
+- namespace.yml
+- app.yml
+- ingress.yml
+- service.yml

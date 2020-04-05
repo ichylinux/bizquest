@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bizquest
+  labels:
+    app: bizquest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bizquest
+  template:
+    metadata:
+      labels:
+        app: bizquest
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: bizquest
+        image: bizquest/app:latest
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secret
+        env:
+        - name: RAILS_LOG_TO_STDOUT
+          value: 'true'
+        - name: RAILS_SERVE_STATIC_FILES
+          value: 'true'
+        - name: PORT
+          value: '3000'
+        command: ["/usr/local/bin/bundle"]
+        args: ["exec", "rails", "s"]
