@@ -78,7 +78,7 @@ spec:
     }
     stage('release') {
       environment {
-        RELEASE_TAG = "v1.0.0-${BUILD_NUMBER}"
+        RELEASE_TAG = "v0.0.1-${BUILD_NUMBER}"
       }
       steps {
         container('docker') {
