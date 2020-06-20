@@ -7,7 +7,7 @@ kind: Pod
 spec:
   containers:
   - name: docker
-    image: ichylinux/docker:19.03
+    image: ichylinux/docker:20.03
     imagePullPolicy: Always
     command:
     - cat
