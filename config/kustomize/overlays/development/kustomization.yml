@@ -1,4 +1,4 @@
-namespace: bizquest
+namespace: dev
 bases:
 - ../../base
 configMapGenerator:
@@ -7,3 +7,4 @@ configMapGenerator:
   - RAILS_ENV=development
 patches:
 - ingress.yml
+- namespace.yml

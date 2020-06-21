@@ -18,7 +18,6 @@ spec:
       containers:
       - name: bizquest
         image: bizquest/app:latest
-        imagePullPolicy: Never
         envFrom:
         - configMapRef:
             name: app-config
