@@ -1,4 +1,7 @@
 FROM bizquest/base:latest
 
-RUN bundle config --local with "development test" && \
+RUN bundle config --delete without && \
     bundle install -j2
+
+ADD  . ./
+RUN sudo chown -R ${USER}:${USER} ./

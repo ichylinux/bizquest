@@ -67,6 +67,9 @@ spec:
 """
         }
       }
+      environment {
+        DISABLE_SPRING = true
+      }
       steps {
         container('bizquest') {
           ansiColor('xterm') {
