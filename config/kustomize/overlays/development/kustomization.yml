@@ -2,7 +2,7 @@ namespace: dev
 bases:
 - ../../base
 configMapGenerator:
-- name: app-config
+- name: bizquest-config
   literals:
   - RAILS_ENV=development
 patches:

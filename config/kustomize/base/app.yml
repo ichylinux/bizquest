@@ -20,7 +20,9 @@ spec:
         image: bizquest/app:latest
         envFrom:
         - configMapRef:
-            name: app-config
+            name: bizquest-config
+        - secretRef:
+            name: bizquest-secret
         env:
         - name: RAILS_LOG_TO_STDOUT
           value: 'true'
