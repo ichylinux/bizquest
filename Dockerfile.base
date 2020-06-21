@@ -4,9 +4,11 @@ RUN sudo yum -y install sqlite-devel
 
 ADD Gemfile Gemfile.lock ./
 RUN sudo chown -R ${USER}:${USER} ./
-RUN bundle config --local without "development test" && \
-    bundle install -j2
+RUN bundle install -j2
 
 ADD package.json yarn.lock ./
 RUN sudo chown -R ${USER}:${USER} ./
 RUN yarn install
+
+ADD  . ./
+RUN sudo chown -R ${USER}:${USER} ./

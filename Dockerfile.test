@@ -1,6 +1,1 @@
 FROM bizquest/base:latest
-
-RUN bundle install -j2
-
-ADD  . ./
-RUN sudo chown -R ${USER}:${USER} ./
