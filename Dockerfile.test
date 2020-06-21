@@ -1,1 +1,4 @@
 FROM bizquest/base:latest
+
+RUN bundle config --local with "development test" && \
+    bundle install -j2
