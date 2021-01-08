@@ -6,9 +6,12 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
+  - name: jnlp
+    volumeMounts:
+      - name: ssh-config
+        mountPath: /home/jenkins/.ssh/
   - name: docker
     image: ichylinux/docker:20.03
-    imagePullPolicy: Always
     command:
     - cat
     tty: true
@@ -22,16 +25,19 @@ spec:
       - name: docker-socket
         mountPath: /var/run/docker.sock
   volumes:
-    - name: docker-config
-      configMap:
-        name: docker-config
     - name: aws-secret
       secret:
         secretName: aws-secret
+    - name: docker-config
+      configMap:
+        name: docker-config
     - name: docker-socket
       hostPath:
         path: /var/run/docker.sock
         type: File
+    - name: ssh-config
+      configMap:
+        name: ssh-config
 """
     }
   }
@@ -59,7 +65,7 @@ kind: Pod
 spec:
   containers:
   - name: bizquest
-    image: ${ECR}/bizquest/base:latest
+    image: ${ECR}/bizquest/test:latest
     imagePullPolicy: Always
     command:
     - cat
