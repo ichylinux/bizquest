@@ -1,5 +1,5 @@
 pipeline {
-  agent { kubernetes { name 'default' } }
+  agent { kubernetes { inheritFrom 'default' } }
   stages {
     stage('build') {
       steps {
