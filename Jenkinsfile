@@ -1,5 +1,5 @@
 pipeline {
-  agent { kubernetes { cloud 'kubernetes' } }
+  agent { kubernetes { name 'default' } }
   stages {
     stage('build') {
       steps {
