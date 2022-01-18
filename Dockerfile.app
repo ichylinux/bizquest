@@ -1,4 +1,5 @@
-FROM bizquest/base:latest
+ARG registry
+FROM ${registry}/bizquest/base:latest
 
 EXPOSE 3000
 

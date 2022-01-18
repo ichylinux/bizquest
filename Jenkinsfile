@@ -6,7 +6,7 @@ pipeline {
         container('kaniko') {
           ansiColor('xterm') {
             sh '/kaniko/executor -f `pwd`/Dockerfile.base -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/base:latest --build-arg registry=${ECR}'
-            sh '/kaniko/executor -f `pwd`/Dockerfile.test -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/test:latest'
+            sh '/kaniko/executor -f `pwd`/Dockerfile.test -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/test:latest --build-arg registry=${ECR}'
           }
         }
       }
@@ -47,7 +47,7 @@ spec:
       steps {
         container('kaniko') {
           ansiColor('xterm') {
-            sh '/kaniko/executor -f `pwd`/Dockerfile.app -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/app:${RELEASE_TAG}'
+            sh '/kaniko/executor -f `pwd`/Dockerfile.app -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/app:${RELEASE_TAG} --build-arg registry=${ECR}'
           }
         }
         container('jnlp') {
