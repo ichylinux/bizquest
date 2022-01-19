@@ -8,7 +8,7 @@ pipeline {
       steps {
         container('kaniko') {
           ansiColor('xterm') {
-            sh '/kaniko/executor -f `pwd`/Dockerfile.base -c `pwd` d=${ECR}/bizquest/base:latest ${KANIKO_OPTIONS}'
+            sh '/kaniko/executor -f `pwd`/Dockerfile.base -c `pwd` -d=${ECR}/bizquest/base:latest ${KANIKO_OPTIONS}'
             sh '/kaniko/executor -f `pwd`/Dockerfile.test -c `pwd` -d=${ECR}/bizquest/test:latest ${KANIKO_OPTIONS}'
           }
         }
