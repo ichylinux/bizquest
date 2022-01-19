@@ -1,12 +1,15 @@
 pipeline {
   agent { kubernetes { inheritFrom 'default' } }
+  environment {
+    KANIKO_OPTIONS = "--cache=${CACHE} --build-arg registry=${ECR}"
+  }
   stages {
     stage('build') {
       steps {
         container('kaniko') {
           ansiColor('xterm') {
-            sh '/kaniko/executor -f `pwd`/Dockerfile.base -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/base:latest --build-arg registry=${ECR}'
-            sh '/kaniko/executor -f `pwd`/Dockerfile.test -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/test:latest --build-arg registry=${ECR}'
+            sh '/kaniko/executor -f `pwd`/Dockerfile.base -c `pwd` d=${ECR}/bizquest/base:latest ${KANIKO_OPTIONS}'
+            sh '/kaniko/executor -f `pwd`/Dockerfile.test -c `pwd` -d=${ECR}/bizquest/test:latest ${KANIKO_OPTIONS}'
           }
         }
       }
@@ -47,7 +50,7 @@ spec:
       steps {
         container('kaniko') {
           ansiColor('xterm') {
-            sh '/kaniko/executor -f `pwd`/Dockerfile.app -c `pwd` --cache=${CACHE} -d=${ECR}/bizquest/app:${RELEASE_TAG} --build-arg registry=${ECR}'
+            sh '/kaniko/executor -f `pwd`/Dockerfile.app -c `pwd` -d=${ECR}/bizquest/app:${RELEASE_TAG} ${KANIKO_OPTIONS}'
           }
         }
         container('jnlp') {
