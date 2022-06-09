@@ -30,5 +30,3 @@ spec:
           value: 'true'
         - name: PORT
           value: '3000'
-        command: ["/usr/local/bin/bundle"]
-        args: ["exec", "rails", "s"]
