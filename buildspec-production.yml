@@ -1,0 +1,12 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_TAG: v0.0.1-47
+
+phases:
+  post_build:
+    commands:
+      - printf '[{"name":"ts-gerbera-api","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
+artifacts:
+  files: imageDetail.json
