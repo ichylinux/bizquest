@@ -9,6 +9,3 @@ RUN bundle install -j2
 ADD package.json yarn.lock ./
 RUN sudo chown -R ${USER}:${USER} ./
 RUN yarn install && yarn cache clean
-
-ADD  . ./
-RUN sudo chown -R ${USER}:${USER} ./
