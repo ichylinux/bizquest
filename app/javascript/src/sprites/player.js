@@ -64,7 +64,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   }
   
   getVelocity(key) {
-    return key.ctrlKey ? 400 : 200;
+    return key.ctrlKey ? 600 : 200;
   }
   
   createMove() {
