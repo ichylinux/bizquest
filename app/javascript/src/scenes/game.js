@@ -16,8 +16,9 @@ export default class Game extends Phaser.Scene {
     this._LEVEL = data.level;
     this._LEVELS = data.levels;
     this._NEWGAME = data.newGame;
+    this.levelName = this._LEVELS[this._LEVEL];
     this.playerData = data.player;
-    this.loadingLevel = false;
+    this.nowLoading = false;
   }
 
   create() {
@@ -27,6 +28,8 @@ export default class Game extends Phaser.Scene {
     if (this._LEVEL === 3) {
       this.createBattleField();
       this.cameras.main.stopFollow();
+    } else if (this._LEVEL === 4) {
+       this.createMap();
     } else {
       this.createMap();
       this.createPlayer();
@@ -41,6 +44,8 @@ export default class Game extends Phaser.Scene {
   update () {
     if (this._LEVEL === 3) {
       this.enemy.update(this.cursors);
+    } else if (this._LEVEL === 4) {
+      // NOP
     } else {
       this.player.update(this.cursors);
     }
@@ -93,21 +98,21 @@ export default class Game extends Phaser.Scene {
   }
 
   createMap() {
-    let levelName = this._LEVELS[this._LEVEL];
-
-    this.add.tileSprite(0, 0, 4000, 4000, levelName, 16);
-    this.map = this.make.tilemap({key: levelName});
-    this.tiles = this.map.addTilesetImage(levelName);
+    this.add.tileSprite(0, 0, 4000, 4000, this.levelName, 16);
+    this.map = this.make.tilemap({key: this.levelName});
+    this.tiles = this.map.addTilesetImage(this.levelName);
 
     this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
     this.backgroundLayer.setScale(this.scale);
 
-    this.objectsLayer = this.map.createStaticLayer('objects', this.tiles, 0, 0);
-    this.objectsLayer.setScale(this.scale);
-
     this.blockedLayer = this.map.createStaticLayer('blocked', this.tiles, 0, 0);
     this.blockedLayer.setScale(this.scale);
     this.blockedLayer.setCollisionByExclusion([-1]);
+
+    if (this._LEVEL !== 4) {
+      this.objectsLayer = this.map.createStaticLayer('objects', this.tiles, 0, 0);
+      this.objectsLayer.setScale(this.scale);
+    }
   }
 
   createBattleField() {
@@ -143,18 +148,18 @@ export default class Game extends Phaser.Scene {
   }
 
   loadNextLevel() {
-    if (!this.loadingLevel) {
+    if (!this.nowLoading) {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL === 1) {
-          this.scene.restart({ level: 2, levels: this._LEVELS, newGame: false, player: {direction: this.player.direction} });
+          this.scene.restart({ level: 2, levels: this._LEVELS, player: {direction: this.player.direction} });
         } else if (this._LEVEL === 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: {direction: this.player.direction} });
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: this.player.direction} });
         } else if (this._LEVEL === 3) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, newGame: false, player: {direction: this.player.direction} });
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: this.player.direction} });
         }
       });
-      this.loadingLevel = true;
+      this.nowLoading = true;
     }
   }
   
