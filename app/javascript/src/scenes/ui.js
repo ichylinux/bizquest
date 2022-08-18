@@ -2,8 +2,8 @@ import Phaser from 'phaser';
 
 export default class UI extends Phaser.Scene {
 
-  constructor () {
-    super({key: 'ui', active: true});
+  constructor (key) {
+    super(key);
   }
 
   init () {
