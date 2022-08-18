@@ -15,6 +15,6 @@ class BizQuest extends Phaser.Game {
 }
 
 window.game = new BizQuest();
-window.addEventListener('resize', (event) => {
+window.addEventListener('resize', () => {
   game.scale.resize(window.innerWidth, window.innerHeight - 4);
 });
