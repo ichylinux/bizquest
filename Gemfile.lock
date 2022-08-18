@@ -79,7 +79,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
-    daddy (0.9.3)
+    daddy (0.9.4)
       docker-api
       highline
       i18n
