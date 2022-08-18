@@ -473,7 +473,7 @@
          "name":"player",
          "objects":[
                 {
-                 "class":"PlayerPosition",
+                 "type":"PlayerPosition",
                  "gid":2116,
                  "height":16,
                  "id":3,
@@ -496,7 +496,7 @@
          "name":"myhome",
          "objects":[
                 {
-                 "class":"Entrance",
+                 "type":"Entrance",
                  "gid":1849,
                  "height":16,
                  "id":6,
@@ -519,7 +519,7 @@
          "name":"coins",
          "objects":[
                 {
-                 "class":"Coin",
+                 "type":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":7,
@@ -531,7 +531,7 @@
                  "y":448
                 }, 
                 {
-                 "class":"Coin",
+                 "type":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":12,
@@ -543,7 +543,7 @@
                  "y":551.5
                 }, 
                 {
-                 "class":"Coin",
+                 "type":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":13,
@@ -555,7 +555,7 @@
                  "y":526.5
                 }, 
                 {
-                 "class":"Coin",
+                 "type":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":14,
@@ -567,7 +567,7 @@
                  "y":609.5
                 }, 
                 {
-                 "class":"Coin",
+                 "type":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":15,
@@ -590,7 +590,7 @@
          "name":"enemies",
          "objects":[
                 {
-                 "class":"Butterfly",
+                 "type":"Butterfly",
                  "gid":2508,
                  "height":32,
                  "id":16,
@@ -602,7 +602,7 @@
                  "y":457.5
                 }, 
                 {
-                 "class":"Butterfly",
+                 "type":"Butterfly",
                  "gid":2508,
                  "height":32,
                  "id":19,
@@ -614,7 +614,7 @@
                  "y":568
                 }, 
                 {
-                 "class":"Butterfly",
+                 "type":"Butterfly",
                  "gid":2508,
                  "height":32,
                  "id":20,
