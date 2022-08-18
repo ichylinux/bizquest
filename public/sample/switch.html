@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            function leap (year){
+                if (year % 4== 0){
+                   if (year % 100 == 0){
+                        if (year % 400 ==0){
+                            return true;
+                        } else {
+                            return false;
+                        }     
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            function calc (){
+                var year = document.getElementById("year");
+                var change= document.getElementById("change");
+                if (year.value !=""){
+                    var answer = leap(year.value);         
+                    if (answer==true){
+                        change.innerHTML="西暦"+year.value+"年はうるう年です"; 
+                    }else{
+                        change.innerHTML="西暦"+year.value+"年はうるう年ではありません"; 
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h2 id = "display">西暦を入力してください</h2>
+        <h2 id = "change"></h2>
+        
+        <p>
+            <input id="year" value=""/>
+            <button onclick="calc()">計算</button>
+        </p>
+    </body>
+</html>
+    
+
+    
