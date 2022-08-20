@@ -226,9 +226,56 @@
          "width":64,
          "x":0,
          "y":0
+        }, 
+        {
+         "class":"Player",
+         "draworder":"topdown",
+         "id":4,
+         "name":"player",
+         "objects":[
+                {
+                 "class":"Player",
+                 "height":0,
+                 "id":6,
+                 "name":"player",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":478.607205035489,
+                 "y":970.928083567698
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "class":"Town",
+         "draworder":"topdown",
+         "id":5,
+         "name":"town",
+         "objects":[
+                {
+                 "class":"Entrance",
+                 "height":39.7696531404848,
+                 "id":5,
+                 "name":"entrance",
+                 "rotation":0,
+                 "visible":true,
+                 "width":94.6243471273604,
+                 "x":431.980715146645,
+                 "y":983.270389714745
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":1,
+ "nextlayerid":6,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
