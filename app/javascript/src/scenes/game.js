@@ -85,7 +85,7 @@ export default class Game extends Phaser.Scene {
   
   createCoins() {
     if (this._LEVEL == 1) {
-      this.coinObjects = this.map.createFromObjects('coins', 'Coin', {key: 'objects', frame: 132});
+      this.coinObjects = this.map.createFromObjects('coins', 'coin', {key: 'objects', frame: 132});
     }
     this.coins = new Coins(this.physics.world, this, [], this.coinObjects);
   }
