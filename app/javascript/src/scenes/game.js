@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import Player from '../sprites/player';
 import MyHome from '../sprites/myhome';
-import Town from '../sprites/town';
 import Coins from '../groups/coins';
 import Enemies from '../groups/enemies';
 
@@ -33,7 +32,6 @@ export default class Game extends Phaser.Scene {
       this.createMap();
       this.createPlayer();
       this.createMyHome();
-      this.createTown();
       this.createCoins();
       this.createEnemies();
       this.addCollisions();
@@ -56,7 +54,6 @@ export default class Game extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.coins, this.coins.collectCoin.bind(this.coins));
     this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
-    this.physics.add.overlap(this.player, this.town, this.loadNextLevel.bind(this));
   }
 
   loadNextLevel(player, object) {
@@ -66,14 +63,10 @@ export default class Game extends Phaser.Scene {
         if (this._LEVEL == 1) {
           if (object == this.myhome) {
             this.scene.restart({ level: 2, levels: this._LEVELS, player: {direction: player.direction} });
-          } else if (object == this.town) {
-            this.scene.restart({ level: 4, levels: this._LEVELS, player: {direction: player.direction} });
           }
         } else if (this._LEVEL == 2) {
           this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
         } else if (this._LEVEL == 3) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
-        } else if (this._LEVEL == 4) {
           this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
         }
       });
@@ -119,14 +112,6 @@ export default class Game extends Phaser.Scene {
     });
   }
   
-  createTown() {
-    this.map.findObject('town', (obj) => {
-      if (this._LEVEL == 1 || this._LEVEL == 4) {
-        this.town = new Town(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
-      }
-    });
-  }
-
   createCoins() {
     if (this._LEVEL == 1) {
       this.coinObjects = this.map.createFromObjects('coins', 'coin', {key: 'objects', frame: 132});
