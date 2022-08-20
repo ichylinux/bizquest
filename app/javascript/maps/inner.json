@@ -137,7 +137,7 @@
          "name":"player",
          "objects":[
                 {
-                 "class":"PlayerPosition",
+                 "type":"PlayerPosition",
                  "gid":1005,
                  "height":16,
                  "id":3,
@@ -160,7 +160,7 @@
          "name":"myhome",
          "objects":[
                 {
-                 "class":"Entrance",
+                 "type":"Entrance",
                  "gid":1001,
                  "height":16,
                  "id":1,
