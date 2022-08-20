@@ -514,6 +514,30 @@
          "y":0
         }, 
         {
+         "class":"Town",
+         "draworder":"topdown",
+         "id":16,
+         "name":"town",
+         "objects":[
+                {
+                 "class":"Entrance",
+                 "gid":1849,
+                 "height":16,
+                 "id":27,
+                 "name":"entrance",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":1065.33333333333,
+                 "y":716.666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "draworder":"topdown",
          "id":14,
          "name":"coins",
@@ -631,8 +655,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":22,
+ "nextlayerid":21,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
