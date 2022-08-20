@@ -55,7 +55,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.player, this.blockedLayer);
     this.physics.add.collider(this.enemies, this.blockedLayer);
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
-    this.physics.add.overlap(this.coins, this.player, this.coins.collectCoin.bind(this.coins));
+    this.physics.add.overlap(this.player, this.coins, this.coins.collectCoin.bind(this.coins));
     this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
   }
 
