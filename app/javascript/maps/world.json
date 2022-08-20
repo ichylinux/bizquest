@@ -477,7 +477,7 @@
                  "gid":2116,
                  "height":16,
                  "id":3,
-                 "name":"PlayerPosition",
+                 "name":"playerPosition",
                  "rotation":0,
                  "visible":true,
                  "width":16,
@@ -493,14 +493,14 @@
         {
          "draworder":"topdown",
          "id":12,
-         "name":"entrances",
+         "name":"myhome",
          "objects":[
                 {
-                 "class":"MyHome",
+                 "class":"Entrance",
                  "gid":1849,
                  "height":16,
                  "id":6,
-                 "name":"myhome",
+                 "name":"entrance",
                  "rotation":0,
                  "visible":true,
                  "width":16,
@@ -632,7 +632,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":21,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
