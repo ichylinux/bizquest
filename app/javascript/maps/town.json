@@ -234,10 +234,10 @@
          "name":"player",
          "objects":[
                 {
-                 "class":"Player",
+                 "class":"PlayerPosition",
                  "height":0,
                  "id":6,
-                 "name":"player",
+                 "name":"playerPosition",
                  "point":true,
                  "rotation":0,
                  "visible":true,
