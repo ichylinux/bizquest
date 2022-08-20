@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Player from '../sprites/player';
 import MyHome from '../sprites/myhome';
+import Town from '../sprites/town';
 import Coins from '../groups/coins';
 import Enemies from '../groups/enemies';
 
@@ -25,15 +26,14 @@ export default class Game extends Phaser.Scene {
     this.scale = 2;
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    if (this._LEVEL === 3) {
+    if (this._LEVEL == 3) {
       this.createBattleField();
       this.cameras.main.stopFollow();
-    } else if (this._LEVEL === 4) {
-       this.createMap();
     } else {
       this.createMap();
       this.createPlayer();
       this.createMyHome();
+      this.createTown();
       this.createCoins();
       this.createEnemies();
       this.addCollisions();
@@ -42,10 +42,8 @@ export default class Game extends Phaser.Scene {
   }
 
   update () {
-    if (this._LEVEL === 3) {
+    if (this._LEVEL == 3) {
       this.enemy.update(this.cursors);
-    } else if (this._LEVEL === 4) {
-      // NOP
     } else {
       this.player.update(this.cursors);
     }
@@ -55,8 +53,47 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.player, this.blockedLayer);
     this.physics.add.collider(this.enemies, this.blockedLayer);
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
+    this.physics.add.overlap(this.player, this.town, this.loadNextLevel.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.coins.collectCoin.bind(this.coins));
     this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
+  }
+
+  loadNextLevel(player, object) {
+    if (!this.nowLoading) {
+      this.cameras.main.fade(500, 0, 0, 0);
+      this.cameras.main.on('camerafadeoutcomplete', () => {
+        if (this._LEVEL == 1) {
+          if (object == this.myhome) {
+            this.scene.restart({ level: 2, levels: this._LEVELS, player: {direction: player.direction} });
+          } else if (object == this.town) {
+            this.scene.restart({ level: 4, levels: this._LEVELS, player: {direction: player.direction} });
+          }
+        } else if (this._LEVEL == 2) {
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
+        } else if (this._LEVEL == 3) {
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
+        } else if (this._LEVEL == 4) {
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
+        }
+      });
+      this.nowLoading = true;
+    }
+  }
+
+  createMap() {
+    this.add.tileSprite(0, 0, 5000, 5000, this.levelName, 16);
+    this.map = this.make.tilemap({key: this.levelName});
+    this.tiles = this.map.addTilesetImage(this.levelName);
+
+    this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
+    this.backgroundLayer.setScale(this.scale);
+
+    this.blockedLayer = this.map.createStaticLayer('blocked', this.tiles, 0, 0);
+    this.blockedLayer.setScale(this.scale);
+    this.blockedLayer.setCollisionByExclusion([-1]);
+
+    this.objectsLayer = this.map.createStaticLayer('objects', this.tiles, 0, 0);
+    this.objectsLayer.setScale(this.scale);
   }
 
   createPlayer() {
@@ -75,14 +112,20 @@ export default class Game extends Phaser.Scene {
 
   createMyHome() {
     this.map.findObject('myhome', (obj) => {
-      if (this._LEVEL === 1) {
-        this.myhome = new MyHome(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
-      } else if (this._LEVEL === 2) {
+      if (this._LEVEL == 1 || this._LEVEL == 2) {
         this.myhome = new MyHome(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
       }
     });
   }
   
+  createTown() {
+    this.map.findObject('town', (obj) => {
+      if (this._LEVEL == 1 || this._LEVEL == 4) {
+        this.town = new Town(this, (obj.x + 6) * this.scale, (obj.y - 6) * this.scale);
+      }
+    });
+  }
+
   createCoins() {
     if (this._LEVEL == 1) {
       this.coinObjects = this.map.createFromObjects('coins', 'coin', {key: 'objects', frame: 132});
@@ -95,24 +138,6 @@ export default class Game extends Phaser.Scene {
       this.butterflyObjects = this.map.createFromObjects('enemies', 'butterfly', {key: 'butterfly', frame: 0});
     }
     this.enemies = new Enemies(this.physics.world, this, [], this.butterflyObjects);
-  }
-
-  createMap() {
-    this.add.tileSprite(0, 0, 4000, 4000, this.levelName, 16);
-    this.map = this.make.tilemap({key: this.levelName});
-    this.tiles = this.map.addTilesetImage(this.levelName);
-
-    this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
-    this.backgroundLayer.setScale(this.scale);
-
-    this.blockedLayer = this.map.createStaticLayer('blocked', this.tiles, 0, 0);
-    this.blockedLayer.setScale(this.scale);
-    this.blockedLayer.setCollisionByExclusion([-1]);
-
-    if (this._LEVEL !== 4) {
-      this.objectsLayer = this.map.createStaticLayer('objects', this.tiles, 0, 0);
-      this.objectsLayer.setScale(this.scale);
-    }
   }
 
   createBattleField() {
@@ -147,20 +172,4 @@ export default class Game extends Phaser.Scene {
     this.promptText.setVisible(!this.promptText.visible);
   }
 
-  loadNextLevel() {
-    if (!this.nowLoading) {
-      this.cameras.main.fade(500, 0, 0, 0);
-      this.cameras.main.on('camerafadeoutcomplete', () => {
-        if (this._LEVEL === 1) {
-          this.scene.restart({ level: 2, levels: this._LEVELS, player: {direction: this.player.direction} });
-        } else if (this._LEVEL === 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: this.player.direction} });
-        } else if (this._LEVEL === 3) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: this.player.direction} });
-        }
-      });
-      this.nowLoading = true;
-    }
-  }
-  
 };
