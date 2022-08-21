@@ -259,13 +259,8 @@
          "objects":[
                 {
                  "type":"Entrance",
-<<<<<<< Updated upstream
-                 "height":39.7696531404848,
-                 "id":5,
-=======
                  "height":0,
                  "id":7,
->>>>>>> Stashed changes
                  "name":"entrance",
                  "rotation":0,
                  "visible":true,
