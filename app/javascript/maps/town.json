@@ -228,13 +228,13 @@
          "y":0
         }, 
         {
-         "class":"Player",
+         "type":"Player",
          "draworder":"topdown",
          "id":4,
          "name":"player",
          "objects":[
                 {
-                 "class":"PlayerPosition",
+                 "type":"PlayerPosition",
                  "height":0,
                  "id":6,
                  "name":"playerPosition",
@@ -252,13 +252,13 @@
          "y":0
         }, 
         {
-         "class":"Town",
+         "type":"Town",
          "draworder":"topdown",
          "id":5,
          "name":"town",
          "objects":[
                 {
-                 "class":"Entrance",
+                 "type":"Entrance",
                  "height":0,
                  "id":7,
                  "name":"entrance",

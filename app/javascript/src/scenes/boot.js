@@ -54,9 +54,9 @@ export default class Boot extends Phaser.Scene {
     setTimeout(() => {
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
-        this.scene.start('game', { level: 1, newGame: true, levels: this.levels });
+        this.scene.start('game', { newGame: true, levels: this.levels });
         this.scene.start('ui');
       });
-    }, 3000);
+    }, 2000);
   }
 };

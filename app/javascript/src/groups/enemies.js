@@ -26,7 +26,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     if (!this.scene.nowLoading) {
       this.scene.cameras.main.fade(1000, 0, 0, 0);
       this.scene.cameras.main.on('camerafadeoutcomplete', () => {
-        this.scene.scene.restart({ level: 3, levels: this.scene._LEVELS, player: {direction: player.direction} });
+        this.scene.scene.restart({ levelFrom: 1, levelTo: 3, levels: this.scene._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
       });
       this.scene.nowLoading = true;
     }
