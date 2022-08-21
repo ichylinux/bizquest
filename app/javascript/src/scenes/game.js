@@ -22,6 +22,7 @@ export default class Game extends Phaser.Scene {
     }
 
     this._LEVELS = data.levels;
+    this.levelFrom = data.levelFrom;
     this.levelName = this._LEVELS[this._LEVEL];
     this.playerData = data.player;
     this.nowLoading = false;
@@ -58,10 +59,10 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.player, this.blockedLayer);
     this.physics.add.collider(this.enemies, this.blockedLayer);
 
-    this.physics.add.overlap(this.player, this.coins, this.coins.collectCoin.bind(this.coins));
-    this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
     this.physics.add.overlap(this.player, this.town, this.loadNextLevel.bind(this));
+    this.physics.add.overlap(this.player, this.coins, this.coins.collectCoin.bind(this.coins));
+    this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
   }
 
   loadNextLevel(player, object) {
@@ -118,7 +119,7 @@ export default class Game extends Phaser.Scene {
     this.map.findObject('player', (obj) => {
       if (this._NEWGAME) {
         this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
-      } else if (this._LEVEL == 1) {
+      } else if (this._LEVEL == 1 && this.levelFrom != 3) {
         let x = this.playerData.x;
         let y = this.playerData.y + 16 * this.scale;
         this.player = new Player(this, x, y);

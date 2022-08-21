@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="144" height="144" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="28">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="144" height="144" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="29">
  <editorsettings>
   <export target="world.json" format="json"/>
  </editorsettings>
@@ -469,7 +469,7 @@
   <object id="6" name="entrance" class="Entrance" gid="1849" x="643.5" y="352" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="16" name="town" class="Town">
-  <object id="27" name="entrance" class="Entrance" gid="1849" x="1065.33" y="716.667" width="16" height="16"/>
+  <object id="28" name="entrance" class="Entrance" x="1071.33" y="708"/>
  </objectgroup>
  <objectgroup id="14" name="coins">
   <object id="7" name="coin" class="Coin" gid="1980" x="769" y="448" width="16" height="16"/>
