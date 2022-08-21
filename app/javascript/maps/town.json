@@ -242,8 +242,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":478.607205035489,
-                 "y":970.928083567698
+                 "x":478.607,
+                 "y":970.928
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -264,9 +264,9 @@
                  "name":"entrance",
                  "rotation":0,
                  "visible":true,
-                 "width":94.6243471273604,
-                 "x":431.980715146645,
-                 "y":983.270389714745
+                 "width":0,
+                 "x":480.607,
+                 "y":1006.21
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -275,7 +275,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":7,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

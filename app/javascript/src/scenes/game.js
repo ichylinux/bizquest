@@ -65,16 +65,16 @@ export default class Game extends Phaser.Scene {
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL == 1) {
           if (object == this.myhome) {
-            this.scene.restart({ level: 2, levels: this._LEVELS, player: {direction: player.direction} });
+            this.scene.restart({ level: 2, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
           } else if (object == this.town) {
-            this.scene.restart({ level: 4, levels: this._LEVELS, player: {direction: player.direction} });
+            this.scene.restart({ level: 4, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
           }
         } else if (this._LEVEL == 2) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         } else if (this._LEVEL == 3) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         } else if (this._LEVEL == 4) {
-          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction} });
+          this.scene.restart({ level: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         }
       });
       this.nowLoading = true;
@@ -99,14 +99,16 @@ export default class Game extends Phaser.Scene {
 
   createPlayer() {
     this.map.findObject('player', (obj) => {
-      if (this._NEWGAME && this._LEVEL === 1) {
-        if (obj.type === 'PlayerPosition') {
+      if (this._LEVEL == 1) {
+        if (this._NEWGAME) {
           this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
+        } else {
+          let x = this.playerData.x || (obj.x * this.scale);
+          let y = this.playerData.y || (obj.y * this.scale);
+          this.player = new Player(this, x, y);
         }
       } else {
-        let x = this.playerData.x || (obj.x * this.scale);
-        let y = this.playerData.y || (obj.y * this.scale);
-        this.player = new Player(this, x, y);
+        this.player = new Player(this, obj.x * this.scale, obj.y * this.scale);
       }
     });
   }
