@@ -473,7 +473,7 @@
          "name":"player",
          "objects":[
                 {
-                 "type":"PlayerPosition",
+                 "class":"PlayerPosition",
                  "gid":2116,
                  "height":16,
                  "id":3,
@@ -496,7 +496,7 @@
          "name":"myhome",
          "objects":[
                 {
-                 "type":"Entrance",
+                 "class":"Entrance",
                  "gid":1849,
                  "height":16,
                  "id":6,
@@ -514,22 +514,21 @@
          "y":0
         }, 
         {
-         "type":"Town",
+         "class":"Town",
          "draworder":"topdown",
          "id":16,
          "name":"town",
          "objects":[
                 {
-                 "type":"Entrance",
-                 "gid":1849,
-                 "height":16,
-                 "id":27,
+                 "class":"Entrance",
+                 "height":0,
+                 "id":28,
                  "name":"entrance",
                  "rotation":0,
                  "visible":true,
-                 "width":16,
-                 "x":1065.33333333333,
-                 "y":716.666666666667
+                 "width":0,
+                 "x":1071.33333333333,
+                 "y":708
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -543,7 +542,7 @@
          "name":"coins",
          "objects":[
                 {
-                 "type":"Coin",
+                 "class":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":7,
@@ -555,7 +554,7 @@
                  "y":448
                 }, 
                 {
-                 "type":"Coin",
+                 "class":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":12,
@@ -567,7 +566,7 @@
                  "y":551.5
                 }, 
                 {
-                 "type":"Coin",
+                 "class":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":13,
@@ -579,7 +578,7 @@
                  "y":526.5
                 }, 
                 {
-                 "type":"Coin",
+                 "class":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":14,
@@ -591,7 +590,7 @@
                  "y":609.5
                 }, 
                 {
-                 "type":"Coin",
+                 "class":"Coin",
                  "gid":1980,
                  "height":16,
                  "id":15,
@@ -614,7 +613,7 @@
          "name":"enemies",
          "objects":[
                 {
-                 "type":"Butterfly",
+                 "class":"Butterfly",
                  "gid":2508,
                  "height":32,
                  "id":16,
@@ -626,7 +625,7 @@
                  "y":457.5
                 }, 
                 {
-                 "type":"Butterfly",
+                 "class":"Butterfly",
                  "gid":2508,
                  "height":32,
                  "id":19,
@@ -638,7 +637,7 @@
                  "y":568
                 }, 
                 {
-                 "type":"Butterfly",
+                 "class":"Butterfly",
                  "gid":2508,
                  "height":32,
                  "id":20,
@@ -656,7 +655,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":28,
+ "nextobjectid":29,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
