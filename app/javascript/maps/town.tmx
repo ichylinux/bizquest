@@ -216,6 +216,6 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="town" class="Town">
-  <object id="7" name="entrance" class="Entrance" x="478.607" y="1005.21"/>
+  <object id="7" name="entrance" class="Entrance" x="522.607" y="1006.21"/>
  </objectgroup>
 </map>
