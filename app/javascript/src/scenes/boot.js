@@ -25,9 +25,9 @@ export default class Boot extends Phaser.Scene {
   preload() {
     this.levels = {
       1: 'world',
-      2: 'inner',
+      2: 'town',
       3: 'battle',
-      4: 'town'
+      4: 'inner'
     };
 
     this.load.tilemapTiledJSON('world', worldMap);
