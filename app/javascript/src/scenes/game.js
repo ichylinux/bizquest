@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 import Player from '../sprites/player';
 import MyHome from '../sprites/myhome';
+import Town from '../sprites/town';
 import Coins from '../groups/coins';
 import Enemies from '../groups/enemies';
-
 import Wizard from '../enemies/wizard';
 
 export default class Game extends Phaser.Scene {
@@ -37,6 +37,7 @@ export default class Game extends Phaser.Scene {
     } else {
       this.createMap();
       this.createMyHome();
+      this.createTown();
       this.createPlayer();
       this.createCoins();
       this.createEnemies();
@@ -58,6 +59,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.enemies, this.blockedLayer);
 
     this.physics.add.overlap(this.player, this.myhome, this.loadNextLevel.bind(this));
+    this.physics.add.overlap(this.player, this.town, this.loadNextLevel.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.coins.collectCoin.bind(this.coins));
     this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
   }
@@ -69,11 +71,15 @@ export default class Game extends Phaser.Scene {
         if (this._LEVEL == 1) {
           if (object == this.myhome) {
             this.scene.restart({ levelFrom: 1, levelTo: 2, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
+          } else if (object == this.town){
+            this.scene.restart({ levelFrom: 1, levelTo: 4, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
           }
         } else if (this._LEVEL == 2) {
           this.scene.restart({ levelFrom: 2, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         } else if (this._LEVEL == 3) {
           this.scene.restart({ levelFrom: 3, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
+        } else if (this._LEVEL == 4) {
+          this.scene.restart({ levelFrom: 4, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         }
       });
       this.nowLoading = true;
@@ -102,6 +108,12 @@ export default class Game extends Phaser.Scene {
     });
   }
   
+  createTown() {
+    this.map.findObject('town',(obj) => {
+      this.town = new Town(this, (obj.x) * this.scale, (obj.y) * this.scale);
+    });
+  }
+
   createPlayer() {
     this.map.findObject('player', (obj) => {
       if (this._NEWGAME) {
