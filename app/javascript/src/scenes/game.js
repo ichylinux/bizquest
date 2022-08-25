@@ -70,16 +70,16 @@ export default class Game extends Phaser.Scene {
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL == 1) {
           if (object == this.myhome) {
-            this.scene.restart({ levelFrom: 1, levelTo: 2, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
-          } else if (object == this.town){
             this.scene.restart({ levelFrom: 1, levelTo: 4, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
+          } else if (object == this.town){
+            this.scene.restart({ levelFrom: 1, levelTo: 2, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
           }
-        } else if (this._LEVEL == 2) {
-          this.scene.restart({ levelFrom: 2, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
-        } else if (this._LEVEL == 3) {
-          this.scene.restart({ levelFrom: 3, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         } else if (this._LEVEL == 4) {
           this.scene.restart({ levelFrom: 4, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
+        } else if (this._LEVEL == 3) {
+          this.scene.restart({ levelFrom: 3, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
+        } else if (this._LEVEL == 2) {
+          this.scene.restart({ levelFrom: 2, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
         }
       });
       this.nowLoading = true;
