@@ -104,13 +104,15 @@ export default class Game extends Phaser.Scene {
 
   createMyHome() {
     this.map.findObject('myhome', (obj) => {
-      this.myhome = new MyHome(this, (obj.x) * this.scale, (obj.y) * this.scale);
+      this.myhome = new MyHome(this, obj.x * this.scale, obj.y * this.scale);
+      this.myhome.setSize(obj.width * this.scale, obj.height * this.scale);
     });
   }
   
   createTown() {
     this.map.findObject('town',(obj) => {
-      this.town = new Town(this, (obj.x) * this.scale, (obj.y) * this.scale);
+      this.town = new Town(this, obj.x * this.scale, obj.y * this.scale);
+      this.town.setSize(obj.width * this.scale, obj.height * this.scale);
     });
   }
 
