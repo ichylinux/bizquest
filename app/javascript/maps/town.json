@@ -259,14 +259,14 @@
          "objects":[
                 {
                  "type":"Entrance",
-                 "height":0,
+                 "height":16.5,
                  "id":7,
                  "name":"entrance",
                  "rotation":0,
                  "visible":true,
-                 "width":0,
-                 "x":480.607,
-                 "y":1006.21
+                 "width":95.4999999999999,
+                 "x":432.107,
+                 "y":991.21
                 }],
          "opacity":1,
          "type":"objectgroup",
