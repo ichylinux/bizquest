@@ -5,6 +5,7 @@ import Game from './scenes/game';
 import UI from './scenes/ui';
 
 class BizQuest extends Phaser.Game {
+  // コンストラクター
   constructor () {
     super(config);
     this.scene.add('boot', Boot);
