@@ -161,7 +161,7 @@ export default class Game extends Phaser.Scene {
       }
     }
 
-    let name = '魔法使い';
+    let name = 'ゆういち';
     this.battleText = this.add.text(offsetX + 16, offsetY + 16, `${name}があらわれた。`, {fontSize: '16px', fill: '#000000'});
     this.promptText = this.add.text(offsetX + ((maxCol - 1) / 2 * 16 * this.scale), offsetY + (16 * 5), '▽', {fontSize: '16px', fill: '#000000'});
     this.time.addEvent({
