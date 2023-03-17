@@ -46,7 +46,7 @@ export default class Game extends Phaser.Scene {
     }
   }
 
-  update () {
+  update() {
     if (this._LEVEL == 3) {
       this.enemy.update(this.cursors);
     } else {
@@ -91,14 +91,14 @@ export default class Game extends Phaser.Scene {
     this.map = this.make.tilemap({key: this.levelName});
     this.tiles = this.map.addTilesetImage(this.levelName);
 
-    this.backgroundLayer = this.map.createStaticLayer('background', this.tiles, 0, 0);
+    this.backgroundLayer = this.map.createLayer('background', this.tiles, 0, 0);
     this.backgroundLayer.setScale(this.scale);
 
-    this.blockedLayer = this.map.createStaticLayer('blocked', this.tiles, 0, 0);
+    this.blockedLayer = this.map.createLayer('blocked', this.tiles, 0, 0);
     this.blockedLayer.setScale(this.scale);
     this.blockedLayer.setCollisionByExclusion([-1]);
 
-    this.objectsLayer = this.map.createStaticLayer('objects', this.tiles, 0, 0);
+    this.objectsLayer = this.map.createLayer('objects', this.tiles, 0, 0);
     this.objectsLayer.setScale(this.scale);
   }
 
@@ -132,14 +132,14 @@ export default class Game extends Phaser.Scene {
 
   createCoins() {
     if (this._LEVEL == 1) {
-      this.coinObjects = this.map.createFromObjects('coins', 'coin', {key: 'objects', frame: 132});
+      this.coinObjects = this.map.createFromObjects('coins', {name: 'coin', key: 'objects', frame: 132});
     }
     this.coins = new Coins(this.physics.world, this, [], this.coinObjects);
   }
 
   createEnemies() {
     if (this._LEVEL == 1) {
-      this.butterflyObjects = this.map.createFromObjects('enemies', 'butterfly', {key: 'butterfly', frame: 0});
+      this.butterflyObjects = this.map.createFromObjects('enemies', {name: 'butterfly', key: 'butterfly', frame: 0});
     }
     this.enemies = new Enemies(this.physics.world, this, [], this.butterflyObjects);
   }

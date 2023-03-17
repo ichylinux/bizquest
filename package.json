@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "5.4.2",
-    "phaser": "3.24.1",
+    "phaser": "3.55.2",
     "rails-erb-loader": "^5.5.2",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",

@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import 'phaser';
 
 export default class Coins extends Phaser.Physics.Arcade.StaticGroup {
 
