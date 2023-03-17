@@ -97,7 +97,7 @@ GEM
     ffi-yajl (2.4.0)
       libyajl2 (>= 1.2)
     fuzzyurl (0.9.0)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     hashie (5.0.0)
     highline (2.0.3)
@@ -143,7 +143,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.3)
+    minitest (5.17.0)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.27)
       tomlrb
