@@ -8,19 +8,11 @@ import Wizard from '../enemies/wizard';
 
 export default class Game extends Phaser.Scene {
 
-  constructor(key) {
-    super(key);
-  }
-
   init(data) {
     this._NEWGAME = data.newGame;
-    if (this._NEWGAME) {
-      this._LEVEL = 1;
-    } else {
-      this._LEVEL = data.levelTo;
-    }
-
+    this._LEVEL = data.levelTo;
     this._LEVELS = data.levels;
+
     this.levelFrom = data.levelFrom;
     this.levelName = this._LEVELS[this._LEVEL];
     this.playerData = data.player;

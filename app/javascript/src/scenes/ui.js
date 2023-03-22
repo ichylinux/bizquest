@@ -2,10 +2,6 @@ import Phaser from 'phaser';
 
 export default class UI extends Phaser.Scene {
 
-  constructor (key) {
-    super(key);
-  }
-
   init () {
     this.coinsCollected = 0;
   }

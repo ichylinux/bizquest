@@ -18,10 +18,6 @@ import wizardImage from 'images/enemies/wizard.png';
 
 export default class Boot extends Phaser.Scene {
 
-  constructor(key) {
-    super(key);
-  }
-
   preload() {
     this.levels = {
       1: 'world',
@@ -47,14 +43,17 @@ export default class Boot extends Phaser.Scene {
   }
 
   create () {
+    // ロゴを画面の中央に表示
     let offsetX = this.sys.canvas.width / 2;
     let offsetY = this.sys.canvas.height / 2;
     this.add.sprite(offsetX, offsetY, 'logo');
 
+    // 2000ミリ秒（2秒）後にメイン画面にシーンを切り替え
     setTimeout(() => {
+      // 500ミリ秒（0.5秒）かけてフェードアウト（カメラを真っ暗に）
       this.cameras.main.fade(500, 0, 0, 0);
       this.cameras.main.on('camerafadeoutcomplete', () => {
-        this.scene.start('game', { newGame: true, levels: this.levels });
+        this.scene.start('game', { newGame: true, levelTo: 1, levels: this.levels });
         this.scene.start('ui');
       });
     }, 2000);
