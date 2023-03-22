@@ -48,7 +48,7 @@ export default class Boot extends Phaser.Scene {
     let offsetY = this.sys.canvas.height / 2;
     this.add.sprite(offsetX, offsetY, 'logo');
 
-    // 2000ミリ秒（2秒）後にメイン画面にシーンを切り替え
+    // 2000ミリ秒（2秒）後にメイン画面にシーンを切り替えるためのタイマーを設定
     setTimeout(() => {
       // 500ミリ秒（0.5秒）かけてフェードアウト（カメラを真っ暗に）
       this.cameras.main.fade(500, 0, 0, 0);
