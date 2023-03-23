@@ -36,6 +36,10 @@ export default class Game extends Phaser.Scene {
       this.addCollisions();
       this.cameras.main.startFollow(this.player);
     }
+
+    if (this._LEVEL == 2) {
+      this.destroyEnemies();
+    }
   }
 
   update() {
@@ -62,16 +66,16 @@ export default class Game extends Phaser.Scene {
       this.cameras.main.on('camerafadeoutcomplete', () => {
         if (this._LEVEL == 1) {
           if (object == this.myhome) {
-            this.scene.restart({ levelFrom: 1, levelTo: 2, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
-          } else if (object == this.town){
-            this.scene.restart({ levelFrom: 1, levelTo: 4, levels: this._LEVELS, player: {direction: player.direction, x: player.x, y: player.y} });
+            this.scene.restart({ levelFrom: 1, levelTo: 2, levels: this._LEVELS, player: { direction: player.direction, x: player.x, y: player.y } });
+          } else if (object == this.town) {
+            this.scene.restart({ levelFrom: 1, levelTo: 4, levels: this._LEVELS, player: { direction: player.direction, x: player.x, y: player.y } });
           }
         } else if (this._LEVEL == 2) {
-          this.scene.restart({ levelFrom: 2, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
+          this.scene.restart({ levelFrom: 2, levelTo: 1, levels: this._LEVELS, player: { direction: player.direction, x: this.playerData.x, y: this.playerData.y } });
         } else if (this._LEVEL == 3) {
-          this.scene.restart({ levelFrom: 3, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
+          this.scene.restart({ levelFrom: 3, levelTo: 1, levels: this._LEVELS, player: { direction: player.direction, x: this.playerData.x, y: this.playerData.y } });
         } else if (this._LEVEL == 4) {
-          this.scene.restart({ levelFrom: 4, levelTo: 1, levels: this._LEVELS, player: {direction: player.direction, x: this.playerData.x, y: this.playerData.y} });
+          this.scene.restart({ levelFrom: 4, levelTo: 1, levels: this._LEVELS, player: { direction: player.direction, x: this.playerData.x, y: this.playerData.y } });
         }
       });
       this.nowLoading = true;
@@ -80,7 +84,7 @@ export default class Game extends Phaser.Scene {
 
   createMap() {
     this.add.tileSprite(0, 0, 5000, 5000, this.levelName, 16);
-    this.map = this.make.tilemap({key: this.levelName});
+    this.map = this.make.tilemap({ key: this.levelName });
     this.tiles = this.map.addTilesetImage(this.levelName);
 
     this.backgroundLayer = this.map.createLayer('background', this.tiles, 0, 0);
@@ -100,9 +104,9 @@ export default class Game extends Phaser.Scene {
       this.myhome.setSize(obj.width * this.scale, obj.height * this.scale);
     });
   }
-  
+
   createTown() {
-    this.map.findObject('town',(obj) => {
+    this.map.findObject('town', (obj) => {
       this.town = new Town(this, obj.x * this.scale, obj.y * this.scale);
       this.town.setSize(obj.width * this.scale, obj.height * this.scale);
     });
@@ -124,16 +128,20 @@ export default class Game extends Phaser.Scene {
 
   createCoins() {
     if (this._LEVEL == 1) {
-      this.coinObjects = this.map.createFromObjects('coins', {name: 'coin', key: 'objects', frame: 132});
+      this.coinObjects = this.map.createFromObjects('coins', { name: 'coin', key: 'objects', frame: 132 });
     }
     this.coins = new Coins(this.physics.world, this, [], this.coinObjects);
   }
 
   createEnemies() {
     if (this._LEVEL == 1) {
-      this.butterflyObjects = this.map.createFromObjects('enemies', {name: 'butterfly', key: 'butterfly', frame: 0});
+      this.butterflyObjects = this.map.createFromObjects('enemies', { name: 'butterfly', key: 'butterfly', frame: 0 });
     }
     this.enemies = new Enemies(this.physics.world, this, [], this.butterflyObjects);
+  }
+
+  destroyEnemies() {
+    this.enemies.clear(this.enemies);
   }
 
   createBattleField() {
@@ -145,8 +153,8 @@ export default class Game extends Phaser.Scene {
     let offsetX = this.sys.canvas.width / 2 - (16 * this.scale * maxCol / 2);
     let offsetY = this.sys.canvas.height - 50 - ((maxRow - 1) * 16 * this.scale);
 
-    for (let i = 0; i < maxRow; i ++) {
-      for (let j = 0; j < maxCol; j ++) {
+    for (let i = 0; i < maxRow; i++) {
+      for (let j = 0; j < maxCol; j++) {
         var image = new Phaser.GameObjects.Image(this, offsetX + (j * 16 * this.scale), offsetY + (i * 16 * this.scale), 'font', (i * maxCol) + j + startFrame);
         this.add.existing(image);
         image.setScale(this.scale);
@@ -154,8 +162,8 @@ export default class Game extends Phaser.Scene {
     }
 
     let name = 'ウィザード';
-    this.battleText = this.add.text(offsetX + 16, offsetY + 16, `${name}があらわれた。`, {fontSize: '16px', fill: '#000000'});
-    this.promptText = this.add.text(offsetX + ((maxCol - 1) / 2 * 16 * this.scale), offsetY + (16 * 5), '▽', {fontSize: '16px', fill: '#000000'});
+    this.battleText = this.add.text(offsetX + 16, offsetY + 16, `${name}があらわれた。`, { fontSize: '16px', fill: '#000000' });
+    this.promptText = this.add.text(offsetX + ((maxCol - 1) / 2 * 16 * this.scale), offsetY + (16 * 5), '▽', { fontSize: '16px', fill: '#000000' });
     this.time.addEvent({
       delay: 500,
       callback: this.blinkPrompt,
@@ -163,7 +171,7 @@ export default class Game extends Phaser.Scene {
       callbackScope: this
     });
   }
-  
+
   blinkPrompt() {
     this.promptText.setVisible(!this.promptText.visible);
   }
