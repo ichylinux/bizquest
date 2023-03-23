@@ -186,6 +186,16 @@ export default class Game extends Phaser.Scene {
   }
 
   finishBattleField() {
+    // TODO 関数 loadNextLevel が期待する引数は player と object の２つ
+    // player は、現在の this.player を渡せば良い。
+    // object は 世界マップ（LEVELが 1）の時にプレイヤーがぶつかったオブジェクトを渡す。
+    // ただし、このタイミングは戦闘シーンからの遷移なので、ぶつかったオブジェクトはない。
+    // wizard.js 内では
+    //   this.scene.loadNextLevel(this.scene.player);
+    // という実装がある。
+    // 同じ要領で、
+    // this.loadNextLevel(this.player);
+    // で良いのではないか。
     this.loadNextLevel(this);
   }
 
