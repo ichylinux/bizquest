@@ -194,7 +194,7 @@ export default class Game extends Phaser.Scene {
     //   this.scene.loadNextLevel(this.scene.player);
     // という実装がある。
     // 同じ要領で、
-    // this.loadNextLevel(this.player);
+    //   this.loadNextLevel(this.player);
     // で良いのではないか。
     this.loadNextLevel(this);
   }
