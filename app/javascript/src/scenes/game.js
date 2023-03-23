@@ -22,6 +22,10 @@ export default class Game extends Phaser.Scene {
   create() {
     this.scale = 2;
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.keys = this.input.keyboard.addKeys({
+      W: Phaser.Input.Keyboard.KeyCodes.W,
+      S: Phaser.Input.Keyboard.KeyCodes.S
+    });
 
     if (this._LEVEL == 3) {
       this.createBattleField();
@@ -47,6 +51,10 @@ export default class Game extends Phaser.Scene {
       this.enemy.update(this.cursors);
     } else {
       this.player.update(this.cursors);
+    }
+
+    if (this.keys.W.isDown && this._LEVEL == 3) {
+      this.finishBattleField();
     }
   }
 
@@ -170,10 +178,15 @@ export default class Game extends Phaser.Scene {
       loop: true,
       callbackScope: this
     });
+
   }
 
   blinkPrompt() {
     this.promptText.setVisible(!this.promptText.visible);
+  }
+
+  finishBattleField() {
+    this.loadNextLevel(this);
   }
 
 };

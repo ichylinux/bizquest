@@ -11,7 +11,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enable(this);
     this.scene.add.existing(this);
     this.setScale(this.scale * this.scene.scale);
-    
+
     this.createMove();
   }
 
@@ -22,7 +22,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     this.anims.animationManager.create({
       key: this.animationKey,
-      frames: this.anims.animationManager.generateFrameNumbers(this.animationKey, {start: start, end: end}),
+      frames: this.anims.animationManager.generateFrameNumbers(this.animationKey, { start: start, end: end }),
       frameRate: frameRate,
       repeat: -1
     });
@@ -37,7 +37,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
       callbackScope: this
     });
   }
-  
+
   changeDirection() {
     this.flipX = this.randomFlip();
     if (this.flipX) {
@@ -52,9 +52,9 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-1 * 10 * Math.floor(Math.random() * 2));
     }
   }
-  
+
   randomFlip() {
     return Math.floor(Math.random() * 2) == 1;
   }
-  
+
 }
