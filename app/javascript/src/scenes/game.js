@@ -9,6 +9,13 @@ import Battle from './battle';
 
 export default class Game extends Phaser.Scene {
 
+  constructor() {
+    super();
+
+    //プレイヤーのレベル（内部処理用）
+    this.playerLevel = 1;
+  }
+
   init(data) {
     this._NEWGAME = data.newGame;
     this._LEVEL = data.levelTo;
@@ -25,7 +32,10 @@ export default class Game extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.keys = this.input.keyboard.addKeys({
       W: Phaser.Input.Keyboard.KeyCodes.W,
-      S: Phaser.Input.Keyboard.KeyCodes.S
+      A: Phaser.Input.Keyboard.KeyCodes.A,
+      S: Phaser.Input.Keyboard.KeyCodes.S,
+      D: Phaser.Input.Keyboard.KeyCodes.D
+
     });
 
     if (this._LEVEL == 3) {
@@ -64,6 +74,18 @@ export default class Game extends Phaser.Scene {
     if (this._LEVEL == 3 && this.battle.sendText === true) {
       this.createBattletext();
     }
+
+    //バトルの結果を監視
+    if (this._LEVEL == 3 && this.battle.phase == "win") {
+      this.playerLevel = this.playerLevel + 1;
+
+      //レベルの過剰加算対策
+      this.battle.phase = "win-back";
+    }
+    if (this._LEVEL == 3 && this.battle.phase == "loose") {
+      this.playerLevel = 1;
+      this.battle.phase = "loose-back";
+    }
   }
 
   addCollisions() {
@@ -76,6 +98,8 @@ export default class Game extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.enemies, this.enemies.startBattle.bind(this.enemies));
   }
 
+  // TODO 関数 loadNextLevel が期待する引数は player と object の２つ
+  // player は、現在の this.player を渡せば良い。
   loadNextLevel(player, object) {
     if (!this.nowLoading) {
       this.cameras.main.fade(500, 0, 0, 0);
@@ -162,7 +186,7 @@ export default class Game extends Phaser.Scene {
 
   //Battleクラスのインスタンスを作成
   createbattle() {
-    this.battle = new Battle();
+    this.battle = new Battle(this, this.playerLevel);
   }
 
   createBattleField() {
@@ -212,17 +236,8 @@ export default class Game extends Phaser.Scene {
   }
 
   finishBattleField() {
-    // TODO 関数 loadNextLevel が期待する引数は player と object の２つ
-    // player は、現在の this.player を渡せば良い。
-    // object は 世界マップ（LEVELが 1）の時にプレイヤーがぶつかったオブジェクトを渡す。
-    // ただし、このタイミングは戦闘シーンからの遷移なので、ぶつかったオブジェクトはない。
-    // wizard.js 内では
-    //   this.scene.loadNextLevel(this.scene.player);
-    // という実装がある。
-    // 同じ要領で、
-    //   this.loadNextLevel(this.player);
-    // で良いのではないか。
-    this.loadNextLevel(this);
-  }
 
+    //これで動きました。
+    this.loadNextLevel(this.player);
+  }
 };
