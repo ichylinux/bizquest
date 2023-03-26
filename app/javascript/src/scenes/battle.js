@@ -2,11 +2,9 @@ import Phaser from 'phaser';
 import DataEnemy from "../groups/dataEnemy";
 import DataPlayer from "../groups/dataPlayer";
 
-export default class Battle extends Phaser.Scene {
+export default class Battle {
     //コンストラクタ
     constructor(scene, level) {
-        super();
-
         this.scene = scene;
         //バトルの終了を宣言する
         this.outBattle = false;
